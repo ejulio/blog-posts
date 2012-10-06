@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2012 Julio
+See the file license.txt for copying permission.
+-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="" />
+        <meta name="author" content="Julio" />
+        <title>session_storageEvent</title>
+
+        <style type="text/css">
+            #support {
+                text-align: center;
+                display: none;
+            }
+            
+            iframe {
+                width: 100%;
+                border: none;
+            }
+            
+            form {
+                border: 1px dashed #CCCCCC;
+                background: #F2F2F2;
+                margin: 0 auto;
+                width: 300px;
+                padding: 5px;
+            }
+            
+            label input {
+                border: 1px solid #CCCCCC;
+                width: 300px;
+                margin: 5px 0;    
+            }
+                
+        </style>
+        <script type="text/javascript">
+            
+            // verify if the browser supports the example
+            function checkSupport()
+            {
+                return (window.addEventListener !== undefined) && (window.sessionStorage !== undefined);
+            }
+            
+            // load the data if there is something
+            function loadData()
+            {
+                var name = window.sessionStorage["blogStorageEventName"];
+                if (name)
+                    setName(name);    
+            }
+            
+            // save the name to sessionStorage
+            function saveName(name)
+            {
+                window.sessionStorage.setItem("blogStorageEventName", name);        
+            }
+            
+            // change the input value
+            function setName(name)
+            {
+                var form = document.getElementById("dataform");
+                
+                form.elements[0].value = name;
+            }
+            
+            // call the function to verify the browser support
+            if (!checkSupport())
+                document.getElementById("support").style.display = "block";
+            else
+            {
+                // on window load, load the data e add the events
+                window.addEventListener("load", function()
+                {
+                    loadData();
+                    
+                    var form = document.getElementById("dataform");
+                    
+                    // cancel the form submit event, save the name to sessionStorage
+                    form.addEventListener("submit", function(e)
+                    {
+                        e = e || window.event;
+                        
+                        var el = form.elements[0];
+                        
+                        saveName(el.value);
+                        
+                        if (e.stopPropagation)
+                            e.stopPropagation();
+                        else
+                            e.cancelBubble = true;
+                            
+                        if (e.preventDefault)
+                            e.preventDefault();
+                        else
+                            e.returnValue = false;
+                            
+                        return false;       
+                    }, false);
+                               
+                }, false);
+                
+                // listen to storage event, and update the name when it 's fired
+                window.addEventListener("storage", function(e)
+                {
+                    setName(e.newValue);
+                }, false);
+            }
+        </script>
+    </head>
+    <body>
+        
+        <h3 id="support">Seu browser não suporta este exemplo</h3>
+        
+        <form id="dataform">
+            <label>
+                Nome
+                <input type="text" name="name">
+            </label>
+            
+            <input type="submit" value="Salvar">
+        </form>
+        
+        <iframe src="iframe_sessionStorage_storageEvent.html">&nbsp;</iframe>
+                  
+    </body>
+</html>

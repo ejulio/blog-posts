@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <title>HTML5 Sticky Position</title>
+	    <style type="text/css">
+	        nav {
+                border: 1px solid #000;
+                background: #F0DB99;
+                padding: 5px;
+            }
+            
+            a {
+                text-decoration: none;
+            }
+            
+            
+            section {
+                font-size: 16px;
+                width: 400px;
+                margin: 0 auto;
+                text-align: justify;
+            }
+            
+            
+            .sticky {
+                position: -webkit-sticky;
+                position: -moz-sticky;
+                position: -ms-sticky;
+                position: -o-sticky;
+                top: 20px;
+            }
+            
+            .message {
+                color: #FF0000;
+            }
+        </style>
+	</head>
+	<body>
+        <h2 class="message">
+            Your browser doesn't support some features needed for this example
+        </h2>
+        
+        <section>
+            <nav class="sticky">
+                <a href="#" title="Just a link">link 1</a>
+                <a href="#" title="Another page">another page 1</a>
+                <a href="#" title="share it">share it 1</a>
+            </nav>
+            
+            <p>&nbsp;</p>
+        </section>
+        
+        <section>
+            <nav class="sticky">
+                <a href="#" title="Just a link">link 2</a>
+                <a href="#" title="Another page">another page 2</a>
+                <a href="#" title="share it">share it 2</a>
+            </nav>
+            
+            <p>&nbsp;</p>
+        </section>
+        
+        <section>
+            <nav class="sticky">
+                <a href="#" title="Just a link">link 3</a>
+                <a href="#" title="Another page">another page 3</a>
+                <a href="#" title="share it">share it 3</a>
+            </nav>
+            
+            <p>&nbsp;</p>
+        </section>
+        
+        <section>
+            <nav class="sticky">
+                <a href="#" title="Just a link">link 4</a>
+                <a href="#" title="Another page">another page 4</a>
+                <a href="#" title="share it">share it 4</a>
+            </nav>
+            
+            <p>&nbsp;</p>
+        </section>​
+	</body>
+</html>

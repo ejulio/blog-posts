@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2012 Julio
+See the end of this file for copying permission.
+-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="" />
+        <meta name="author" content="Julio" />
+        <title>sessionStorage</title>
+
+        <style type="text/css">
+            
+            section, form {
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                -o-border-radius: 5px;
+                -ms-border-radius: 5px;
+                -khtml-border-radius: 5px;
+                
+                width: 400px;
+                padding: 10px;
+                margin: 5px auto;
+                border: 1px dashed #CCCCCC;
+                background: #F2F2F2;
+            }
+            
+            label input, label textarea {
+                border: 1px solid #CCCCCC;
+                width: 400px;
+                box-sizing: border-box;    
+            }
+            
+            label textarea {
+                height: 200px;
+            }
+            
+            h4 {
+                margin: 0 0 5px 0;
+            }
+            
+            #support {
+                display: none;
+            }
+            
+        </style>
+        <script type="text/javascript">
+            
+            
+            // check the browser support
+            function checkSupport()
+            {
+                return (window.addEventListener !== undefined) && (window.sessionStorage !== undefined);
+            }
+            
+            // load the sessionStorage data if there is something
+            function loadData()
+            {
+                var data = window.sessionStorage["blogExampleMessage"];
+                if (data)
+                    writeMessage(JSON.parse(data));    
+            }
+            
+            // save the data to sessionStorage
+            function saveMessage(data)
+            {
+                window.sessionStorage.setItem("blogExampleMessage", JSON.stringify(data));        
+            }
+            
+            // write the data on the respective HTML elements
+            function writeMessage(data)
+            {
+                var name = document.getElementById("name"),
+                    subject = document.getElementById("subject"),
+                    message = document.getElementById("message");
+                
+                name.textContent = "Nome: " + data.name;
+                subject.textContent = "Assunto: " + data.subject;
+                message.textContent = "Mensagem: " + data.message;
+            }
+            
+            // verify the browser support
+            if (!checkSupport())
+                document.getElementById("support").style.display = "block";
+            else
+            {
+                // on window load, load the data
+                window.addEventListener("load", function()
+                {
+                    loadData();
+                    
+                    var form = document.getElementById("dataform");
+                    
+                    // cancel the form submit event, save the message, and write it to HTML element
+                    form.addEventListener("submit", function(e)
+                    {
+                        e = e || window.event;
+                        
+                        var els = form.elements,
+                            data = {};
+                        
+                        for (var i = 0; i < els.length - 1; i++)
+                            data[els[i].name] = els[i].value || els[i].textContent;
+                        
+                        saveMessage(data);
+                        writeMessage(data);
+                        
+                        if (e.stopPropagation)
+                            e.stopPropagation();
+                        else
+                            e.cancelBubble = true;
+                            
+                        if (e.preventDefault)
+                            e.preventDefault();
+                        else
+                            e.returnValue = false;
+                            
+                        return false;       
+                    }, false);
+                               
+                }, false);
+                
+            }
+        </script>
+    </head>
+    <body>
+        
+        <h3 id="support">Seu browser não suporta este exemplo</h3>
+        
+        <form id="dataform">
+            <label>
+                Nome
+                <input type="text" name="name">
+            </label>
+            
+            <label>
+                Assunto
+                <input type="text" name="subject">
+            </label>
+            
+            <label>
+                Mensagem
+                <textarea name="message"></textarea>    
+            </label>
+            
+            <input type="submit" value="Salvar">
+            
+        </form>
+        
+        <section id="users">
+            <h4>Última mensagem salva</h4>
+            <p id="name">&nbsp;</p>
+            <p id="subject">&nbsp;</p>
+            <p id="message">&nbsp;</p>    
+        </section>
+                  
+    </body>
+</html>
+
+<!--
+Copyright (c) 2012 Julio
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->

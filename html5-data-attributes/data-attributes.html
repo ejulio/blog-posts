@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2012 Júlio César Batista <julio.batista@outlook.com>
+See the end of this file for copying permission.
+-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="" />
+        <meta name="author" content="Julio" />
+        <title>data-attributes</title>
+
+        <style type="text/css">
+            
+        </style>
+        
+        <script type="text/javascript">
+        
+            window.addEventListener("load", function()
+            {
+                var select = document.getElementById("select_lang"),
+                    opts = select.options,
+                    getAttr = document.getElementById("getAttr"),
+                    dataset = document.getElementById("dataset");
+                
+                select.addEventListener("change", function(e)
+                {
+                    var opt = opts[opts.selectedIndex],
+                        txtDataset = document.createTextNode(opt.dataset.myExampleImg),
+                        txtGetAttr = document.createTextNode(opt.getAttribute("data-my-example-img")),
+                        br1 = document.createElement("br"),
+                        br2 = document.createElement("br");
+                        
+                    getAttr.appendChild(txtGetAttr);
+                    dataset.appendChild(txtDataset);
+                    
+                    getAttr.appendChild(br1);
+                    dataset.appendChild(br2);
+                        
+                });      
+                    
+            });  
+         
+        </script>
+
+    </head>
+    <body>
+        
+            
+        <span>
+            Selecione um idioma
+            <select name="language" id="select_lang">
+                <option value="pt" data-my-example-img="Aqui deveria existir uma imagem para Português" selected>Português</option>
+                <option value="en" data-my-example-img="Aqui deveria existir uma imagem para English">English</option>
+            </select>    
+        </span>
+            
+        <section id="getAttr">
+            <h2>getAttribute()</h2>
+        </section>
+        
+        <section id="dataset">
+            <h2>dataset</h2>
+        </section>
+        
+    </body>
+</html>
+
+<!--
+Copyright (c) 2012 Júlio César Batista <julio.batista@outlook.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
