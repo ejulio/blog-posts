@@ -1,0 +1,5 @@
+C:\Users\Julio\Desktop\Júlio\Projetos\C#\Parametros por referencia\Parametros por referencia\bin\Debug\Parametros por referencia.exe
+C:\Users\Julio\Desktop\Júlio\Projetos\C#\Parametros por referencia\Parametros por referencia\bin\Debug\Parametros por referencia.pdb
+C:\Users\Julio\Desktop\Júlio\Projetos\C#\Parametros por referencia\Parametros por referencia\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Julio\Desktop\Júlio\Projetos\C#\Parametros por referencia\Parametros por referencia\obj\x86\Debug\Parametros por referencia.exe
+C:\Users\Julio\Desktop\Júlio\Projetos\C#\Parametros por referencia\Parametros por referencia\obj\x86\Debug\Parametros por referencia.pdb
