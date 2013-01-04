@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid class</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="../../extjs/resources/css/ext-all-gray.css" />
+        <script src="../../extjs/ext-all-dev.js"></script>
+        <script>
+            
+            Ext.define('GridBuilder', {
+                
+                grouping: false,
+                
+                build: function()
+                {
+                    var gridCfg = {
+                        xtype: 'grid',
+                        features: []    
+                    };
+                    
+                    if (this.grouping)
+                    {
+                        this.applyGrouping(gridCfg);
+                    }
+                    
+                    // O padrão diz para retornar uma instância, no entanto, pode-se adptá-lo para retornar apenas a configuração neste caso
+                    // return Ext.create('Ext.grid.Panel', gridCfg);
+                    return gridCfg;
+                },
+                
+                applyGrouping: function(gridCfg)
+                {
+                    var groupingCfg = {
+                        ftype: 'grouping'
+                    };
+                    
+                    if (!Ext.isObject(this.grouping))
+                    {
+                        this.grouping = {};
+                    }
+                    
+                    Ext.applyIf(this.grouping, groupingCfg);
+                    
+                    gridCfg.features.push(this.grouping);
+                }    
+                
+            });
+            
+            Ext.onReady(function()
+            {
+                var store = Ext.create('Ext.data.Store', {
+                    fields: [
+                        {name: 'ID', type: 'int'},
+                        {name: 'Nome', type: 'string'}
+                    ],
+                    data: [{
+                        ID: 1,
+                        Nome: 'Teste 1'
+                    },{
+                        ID: 2,
+                        Nome: 'Teste 2'
+                    },{
+                        ID: 3,
+                        Nome: 'Teste 1'
+                    },{
+                        ID: 4,
+                        Nome: 'Teste 2'
+                    }]
+                });
+                
+                var gridBuilder = Ext.create('GridBuilder');
+                gridBuilder.grouping = true;
+                
+                var grid = gridBuilder.build();
+                
+                Ext.apply(grid, {
+                    renderTo: Ext.getBody(),
+                    store: store,
+                    width: 250,
+                    height: 300,
+                    grouping: true,
+                    columns: [{
+                        header: 'ID',
+                        dataIndex: 'ID'
+                    }, {
+                        header: 'Nome',
+                        dataIndex: 'Nome'
+                    }]
+                });
+                
+                Ext.create('Ext.grid.Panel', grid);
+            });
+            
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>
