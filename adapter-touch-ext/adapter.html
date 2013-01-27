@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Adapter ExtJS Sencha Touch</title>
+		
+		<!--
+		<link rel="stylesheet" type="text/css" href="/include/extjs/resources/css/ext-all-gray.css">
+		<script src="/include/extjs/ext-all-debug.js"></script>
+		-->
+		
+		<link rel="stylesheet" type="text/css" href="/include/senchatouch/resources/css/sencha-touch.css">
+		<script src="/include/senchatouch/sencha-touch-all-debug.js"></script>
+		
+		
+		<script>
+			
+			Ext.define('Api', {
+				statics: {
+					isMobile: function()
+					{
+						return !!Ext.os;
+					}
+				}
+			});
+			
+			Ext.define('Api.util.Observable', {
+				extend: Ext.util.Observable || Ext.mixins.Observable
+			});
+			
+			Ext.define('Api.Loader', {
+				singleton: true,
+				extend: 'Api.util.Observable',
+				
+				constructor: function()
+				{
+					this.addEvents('load');
+					if (Api.isMobile())
+					{
+						this.setupTouch();
+					}
+					else
+					{
+						this.setupExt();
+					}
+					
+					this.callParent(arguments);
+				},
+				
+				setupExt: function()
+				{
+					Ext.onReady(this.onFrameworkReady, this);
+				},
+				
+				setupTouch: function()
+				{
+					Ext.setup({
+						scope: this,
+						onReady: this.onFrameworkReady
+					});
+				},
+				
+				onFrameworkReady: function()
+				{
+					Api.Viewport = Api.isMobile() ? Ext.Viewport : Ext.create('Ext.container.Viewport');
+					this.fireEvent('load');
+				},
+				
+				onReady: function(fn)
+				{
+					this.on('load', fn);
+				}
+				
+			});
+			
+			Ext.define('Api.Error', {
+				statics: {
+					raise: function(message)
+					{
+						if (!Api.isMobile())
+						{
+							Ext.Error.raise(message);
+						}
+						
+						throw new Error(message);
+					}
+				}
+			});
+			
+			Api.Loader.onReady(function()
+			{
+				console.log('Iniciado');	
+				Api.Error.raise('Error :(');
+			});
+			
+			
+		</script>
+		
+	</head>
+	<body>
+		
+	</body>
+</html>
