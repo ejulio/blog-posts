@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    border: 5px dashed #CCC;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.title {
+    text-align: center;
+}
+
+.drag-target {
+    border: 5px solid green;
+}
+
+.image-preview {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin: 5px;
+}
