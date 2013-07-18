@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "relational-operator", "relational-operator\relational-operator.csproj", "{ECA91B99-BFC3-4088-893E-32199D1587F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECA91B99-BFC3-4088-893E-32199D1587F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECA91B99-BFC3-4088-893E-32199D1587F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECA91B99-BFC3-4088-893E-32199D1587F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECA91B99-BFC3-4088-893E-32199D1587F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

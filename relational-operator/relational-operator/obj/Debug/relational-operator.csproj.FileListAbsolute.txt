@@ -1,0 +1,6 @@
+C:\Users\Julio\Desktop\Júlio\Projects\blog-posts\relational-operator\relational-operator\bin\Debug\relational-operator.exe.config
+C:\Users\Julio\Desktop\Júlio\Projects\blog-posts\relational-operator\relational-operator\obj\Debug\relational-operator.csprojResolveAssemblyReference.cache
+C:\Users\Julio\Desktop\Júlio\Projects\blog-posts\relational-operator\relational-operator\bin\Debug\relational-operator.exe
+C:\Users\Julio\Desktop\Júlio\Projects\blog-posts\relational-operator\relational-operator\bin\Debug\relational-operator.pdb
+C:\Users\Julio\Desktop\Júlio\Projects\blog-posts\relational-operator\relational-operator\obj\Debug\relational-operator.exe
+C:\Users\Julio\Desktop\Júlio\Projects\blog-posts\relational-operator\relational-operator\obj\Debug\relational-operator.pdb
