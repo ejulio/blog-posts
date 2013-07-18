@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Image</title>
+		<link href="http://cdn.sencha.com/ext/gpl/4.2.0/resources/css/ext-all.css" rel="stylesheet" />
+		<script src="http://cdn.sencha.com/ext/gpl/4.2.0/ext-all.js"></script>
+	</head>
+	<body>
+
+	</body>
+	<script type="text/javascript">
+
+		Ext.Ajax.request({
+			binary: true,
+			url: 'image.png',
+			success: function(response)
+			{
+				var blob = new Blob([response.responseBytes], {type: 'image/png'}),
+					url = window.URL.createObjectURL(blob),
+					img = document.createElement('img');
+				
+				img.src = url;
+
+				Ext.getBody().appendChild(img);
+			}
+		});
+
+	</script>
+</html>
