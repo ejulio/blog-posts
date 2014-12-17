@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="utf-8">
+    	<title>Sistema solar three.js</title>
+
+    	<style type="text/css">
+    		body {
+    			margin: 0;
+    			padding: 0;
+    		}
+    	</style>
+    </head>
+    <body>
+
+    	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.js"></script>
+    	<script type="text/javascript">
+    	    var ORIGEM = new THREE.Vector3(0, 0, 0);
+
+    		var cena = new THREE.Scene();
+
+    		var fovy = 75,
+    			aspectRatio = window.innerWidth / window.innerHeight,
+    			near = 1,
+    			far = 300;
+
+    		var camera = new THREE.PerspectiveCamera(fovy, aspectRatio, near, far);
+    		camera.position.set(75, 75, 75);
+    		camera.lookAt(ORIGEM);
+
+    		var renderer = new THREE.WebGLRenderer();
+    		renderer.setSize(window.innerWidth, window.innerHeight);
+    		document.body.appendChild(renderer.domElement);
+
+    		function criarSol(objeto)
+    		{
+    			var geometriaSol = new THREE.SphereGeometry(20, 20, 20),
+    				materialSol = new THREE.MeshLambertMaterial({
+						map: THREE.ImageUtils.loadTexture('sun.jpg')
+					}),
+    				sol = new THREE.Mesh(geometriaSol, materialSol);
+
+    			sol.add(objeto)
+    			cena.add(sol);
+
+    			return sol;
+    		}
+
+    		function criarTerra(objeto)
+    		{
+    			var geometriaTerra = new THREE.SphereGeometry(5, 20, 20),
+    				materialTerra = new THREE.MeshLambertMaterial({
+						map: THREE.ImageUtils.loadTexture('earth.jpg')
+					}),
+    				terra = new THREE.Mesh(geometriaTerra, materialTerra);
+
+
+    			terra.translateX(50);
+    			terra.add(objeto);
+
+    			return terra;
+    		}
+
+    		function criarLua()
+    		{
+    			var geometriaLua = new THREE.SphereGeometry(1, 20, 20),
+    				materialLua = new THREE.MeshBasicMaterial({color: 0x909090}),
+    				lua = new THREE.Mesh(geometriaLua, materialLua);
+
+    			lua.translateX(10);
+
+    			return lua;
+    		}
+
+			function criarLuz()
+           	{
+	            var pointLight = new THREE.PointLight(0xFFFFFF);
+	            pointLight.position.set(10, 50, 30);
+	            cena.add(pointLight);
+           	}
+
+    		var lua = criarLua();
+    		var terra = criarTerra(lua);
+    		var sol = criarSol(terra);
+    		criarLuz();
+
+    		function rotacionarSol()
+    		{
+    			var matrizRotacao = new THREE.Matrix4();
+    			matrizRotacao.makeRotationY(calcularRadianos(1));
+    			sol.applyMatrix(matrizRotacao);
+    		}
+
+    		function rotacionarTerra()
+    		{
+    			var matrizRotacaoY = new THREE.Matrix4();
+    			matrizRotacaoY.makeRotationY(calcularRadianos(1));
+    			terra.applyMatrix(matrizRotacaoY);
+
+    			var matrizRotacaoEixo = new THREE.Matrix4(),
+    				matrizTranslacaoPosicao = new THREE.Matrix4(),
+    				matrizTranslacaoOrigem = new THREE.Matrix4(),
+    				posicao = terra.position;
+
+    			matrizRotacaoEixo.makeRotationY(calcularRadianos(1.5));
+    			matrizTranslacaoPosicao.makeTranslation(posicao.x, posicao.y, posicao.z);
+    			matrizTranslacaoOrigem.makeTranslation(-posicao.x, -posicao.y, -posicao.z);
+
+    			terra.applyMatrix(matrizTranslacaoOrigem);
+    			terra.applyMatrix(matrizRotacaoEixo);
+    			terra.applyMatrix(matrizTranslacaoPosicao);
+    		}
+
+    		function rotacionarLua()
+    		{
+    			var matrizRotacaoY = new THREE.Matrix4();
+    			matrizRotacaoY.makeRotationY(calcularRadianos(2));
+    			lua.applyMatrix(matrizRotacaoY);
+
+    			var matrizRotacaoEixo = new THREE.Matrix4(),
+    				matrizTranslacaoPosicao = new THREE.Matrix4(),
+    				matrizTranslacaoOrigem = new THREE.Matrix4(),
+    				posicao = lua.position;
+
+    			matrizRotacaoEixo.makeRotationY(calcularRadianos(0.6));
+    			matrizTranslacaoPosicao.makeTranslation(posicao.x, posicao.y, posicao.z);
+    			matrizTranslacaoOrigem.makeTranslation(-posicao.x, -posicao.y, -posicao.z);
+
+    			lua.applyMatrix(matrizTranslacaoOrigem);
+    			lua.applyMatrix(matrizRotacaoEixo);
+    			lua.applyMatrix(matrizTranslacaoPosicao);
+    		}
+
+    		function calcularRadianos(grau)
+    		{
+    			return grau * Math.PI / 180;
+    		}
+
+    		function render()
+    		{
+    			renderer.render(cena, camera);
+
+    			rotacionarLua();
+    			rotacionarTerra();
+    			rotacionarSol();
+
+    			requestAnimationFrame(render);
+    		}
+
+    		render();
+
+    	</script>
+    </body>
+</html>
