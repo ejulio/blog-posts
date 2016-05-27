@@ -15,7 +15,7 @@ dataset = fetch_20newsgroups(subset = 'train', categories = categories,
 	shuffle = True, random_state = 42)
 
 # classifier: one vs one SVM
-classifier = OneVsOneClassifier(SVC(kernel = 'rbf', random_state = 84))
+classifier = OneVsOneClassifier(SVC(kernel = 'linear', random_state = 84))
 
 # features: tokenizer & tf-idf
 count_vector = CountVectorizer()
